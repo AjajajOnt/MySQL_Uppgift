@@ -3,40 +3,38 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 
-class MyClass
 
+
+Console.WriteLine("Ange ett namn");
+var input = Console.ReadLine();
+
+var sql = "Select username, password from RandomUsers";
+var dt = GetDataTable(input, "", "");
+
+
+
+object GetDataTable(string sql, string paramName, string paramValue)
 {
+    var connString = "server=(localdb\\mssqllocaldb;integrated security=true; database=RandomUsers";
+    var dt = new DataTable();
+    using (var connection = new SqlConnection(connString))
 
-    Console.WriteLine("Ange ett namn");
-        var input = Console.ReadLine();
-    var sql = "Select * from RandomUsers";
-
-
-
-
-    private static DataTable GetDataTable(string sql, string paramName, string paramValue)
     {
+        connection.Open();
 
-        var connString = "server=(localdb\\mssqllocaldb;integrated security=true; database=RandomUsers";
-        var dt = new DataTable();
-        using (var connection = new SqlConnection(connString)) 
-
+        using (var command = new SqlCommand(sql, connection))
         {
-            connection.Open();
-
-            using (var command = new SqlCommand(sql, connection))
+            command.Parameters.AddWithValue(paramName, paramValue);
+            using (var adapter = new SqlDataAdapter(command))
             {
-                command.Parameters.AddWithValue(paramName, paramValue);
-                using (var adapter = new SqlDataAdapter(command))
-                {
-                    adapter.Fill(dt);
-                }
+                adapter.Fill(dt);
             }
-
         }
-        return dt;
-    }
 
+    }
+    return dt;
 }
+
+
 
 
