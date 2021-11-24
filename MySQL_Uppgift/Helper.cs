@@ -145,8 +145,8 @@ namespace MySQL_Uppgift
             }
             Console.WriteLine("");
             Console.WriteLine("There are " + Counter + " Unique Countries");
-            Console.ReadKey();
-            StartProgram();
+
+            PressSomething();
         }
 
         public void PrintRows()
@@ -178,36 +178,75 @@ namespace MySQL_Uppgift
 
         public void SecondSearch()
         {
-            Counter = 0;
             var sql = "SELECT top 1  country,  COUNT(country) AS country_occurrence from RandomUsers group by country ORDER BY   country_occurrence DESC";
             var dt = GetDataTable(sql);
 
             foreach (DataRow row in dt.Rows)
             {
                 
-                Console.WriteLine(row["country"] + " " + row["country_occurrence"]);
+                Console.WriteLine("Most people come from " + row["country"] + " " + "There are " + row["country_occurrence"] +  " from there");
 
 
             }
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.ReadKey();
             PressSomething();
         }
 
         public void ThirdSearch()
         {
-            throw new System.NotImplementedException();
+            Counter = 0;
+            var sql = "SELECT top 10 last_name from RandomUsers where last_name like 'L%'";
+            var dt = GetDataTable(sql);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Counter++;
+                Console.WriteLine(Counter + " Last name: " + row["last_name"]);
+
+
+            }
+            PressSomething();
         }
 
         public void FourthSearch()
         {
-            throw new System.NotImplementedException();
+            var sql = "SELECT first_name, last_name from RandomUsers where left(first_name, 1) = left(last_name, 1)";
+            var dt = GetDataTable(sql);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Counter++;
+                Console.WriteLine(row["First_name"] + " " + row["last_name"]);
+
+
+            }
+            PressSomething();
         }
 
         public void FifthSearch()
         {
-            throw new System.NotImplementedException();
+            var sql = "SELECT count(country) as 'Skandinaviska' from RandomUsers where country like 'sweden' or country like 'denmark' or country like 'norway'";
+            var dt = GetDataTable(sql);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Counter++;
+                Console.WriteLine("There are " + row["Skandinaviska"] + " countries from scandinavium.");
+
+
+            }
+
+             sql = "SELECT count(country) as 'Nordic Countries' from RandomUsers where country like 'finland' or country like 'denmark' or country like 'norway' or country like 'sweden' or country like 'iceland'";
+             dt = GetDataTable(sql);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Counter++;
+                Console.WriteLine("There are " + row["Nordic Countries"] + " Nordic Countries.");
+
+
+            }
+
+            PressSomething();
         }
 
         public void SixthSearch()
