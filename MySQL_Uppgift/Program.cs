@@ -41,5 +41,25 @@ static DataTable GetDataTable(string sql, string paramName, string paramValue)
 }
 
 
+static void ExecuteSQL(string sql, string paramName, string paramValue)
+{
+    var connString = "server=(localdb)\\mssqllocaldb;integrated security=true; database=RandomUsers";
+    var dt = new DataTable();
+    using (var connection = new SqlConnection(connString))
+
+    {
+        connection.Open();
+
+        using (var command = new SqlCommand(sql, connection))
+        {
+            command.Parameters.AddWithValue(paramName, paramValue);
+            command.ExecuteNonQuery();
+
+        }
+
+    }
+    
+}
+
 
 
