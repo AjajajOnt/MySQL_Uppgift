@@ -8,14 +8,19 @@ using System.Data.SqlClient;
 Console.WriteLine("Ange ett namn");
 var input = Console.ReadLine();
 
-var sql = "Select username, password from RandomUsers";
-var dt = GetDataTable(input, "", "");
+var sql = "Select username, password from RandomUsers WHERE username LIKE @param";
+var dt = GetDataTable(sql, "@param" , "%" + input + "%");
 
-
-
-object GetDataTable(string sql, string paramName, string paramValue)
+foreach (DataRow row in dt.Rows)
 {
-    var connString = "server=(localdb\\mssqllocaldb;integrated security=true; database=RandomUsers";
+    Console.WriteLine(row["username"] + " " + row["password"]);
+
+}
+
+
+static DataTable GetDataTable(string sql, string paramName, string paramValue)
+{
+    var connString = "server=(localdb)\\mssqllocaldb;integrated security=true; database=RandomUsers";
     var dt = new DataTable();
     using (var connection = new SqlConnection(connString))
 
