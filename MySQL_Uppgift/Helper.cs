@@ -149,17 +149,6 @@ namespace MySQL_Uppgift
             PressSomething();
         }
 
-        public void PrintRows()
-        {
-
-            //for (var i = 0; i < dt.Columns.Count; i++)
-            //{
-            //    Console.WriteLine("There are " + row[i] + " unique Countries");
-            //}
-            //Console.WriteLine();
-
-
-        }
 
         public int TryCatch(int Choose)
         {
