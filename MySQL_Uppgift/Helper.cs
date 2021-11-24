@@ -78,7 +78,7 @@ namespace MySQL_Uppgift
                         break;
 
                     default:
-                        MenuChoice = 0;
+                        StartProgram();
                         break;
 
 
@@ -251,7 +251,17 @@ namespace MySQL_Uppgift
 
         public void SixthSearch()
         {
-            throw new System.NotImplementedException();
+            var sql = "SELECT count(distinct password) as 'Unique Passwords', count(distinct username) as 'Unique Usernames'  from RandomUsers";
+            var dt = GetDataTable(sql);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                
+
+                Console.WriteLine("There are " + row["Unique Passwords"] + " unique passwords"+  " and " + row["Unique Passwords"] + " unique usernames");
+
+            }
+            PressSomething();
         }
 
         public void PressSomething()
