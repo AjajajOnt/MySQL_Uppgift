@@ -54,23 +54,23 @@ namespace MySQL_Uppgift
                         break;
 
                     case 2:
-
+                        SecondSearch();
                         break;
 
                     case 3:
-
+                        ThirdSearch();
                         break;
 
                     case 4:
-
+                        FourthSearch();
                         break;
 
                     case 5:
-
+                        FifthSearch();
                         break;
 
                     case 6:
-
+                        SixthSearch();  
                         break;
 
                     case 7:
@@ -141,11 +141,7 @@ namespace MySQL_Uppgift
                 Counter++;
                 Console.WriteLine(row["country"] + " " + Counter);
                 
-                //for (var i = 0; i < dt.Columns.Count; i++)
-                //{
-                //    Console.WriteLine("There are " + row[i] + " unique Countries");
-                //}
-                //Console.WriteLine();
+
             }
             Console.WriteLine("");
             Console.WriteLine("There are " + Counter + " Unique Countries");
@@ -155,10 +151,14 @@ namespace MySQL_Uppgift
 
         public void PrintRows()
         {
-            
-            
 
-            
+            //for (var i = 0; i < dt.Columns.Count; i++)
+            //{
+            //    Console.WriteLine("There are " + row[i] + " unique Countries");
+            //}
+            //Console.WriteLine();
+
+
         }
 
         public int TryCatch(int Choose)
@@ -174,6 +174,53 @@ namespace MySQL_Uppgift
             }
 
             return Choose;
+        }
+
+        public void SecondSearch()
+        {
+            Counter = 0;
+            var sql = "SELECT top 1  country,  COUNT(country) AS country_occurrence from RandomUsers group by country ORDER BY   country_occurrence DESC";
+            var dt = GetDataTable(sql);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                
+                Console.WriteLine(row["country"] + " " + row["country_occurrence"]);
+
+
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.ReadKey();
+            PressSomething();
+        }
+
+        public void ThirdSearch()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void FourthSearch()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void FifthSearch()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SixthSearch()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void PressSomething()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("[Enter to continue.]");
+            Console.ReadKey();
+            StartProgram();
         }
     }
 }
