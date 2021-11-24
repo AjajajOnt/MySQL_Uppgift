@@ -3,19 +3,93 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 
-
+int MenuChoice =0;
+bool Exit = false;
 
 Console.WriteLine("Ange ett namn");
 var input = Console.ReadLine();
 
-var sql = "Select username, password from RandomUsers WHERE username LIKE @param";
+var sql = "Select username, password, email from RandomUsers WHERE username LIKE @param";
 var dt = GetDataTable(sql, "@param" , "%" + input + "%");
 
-foreach (DataRow row in dt.Rows)
+PrintRow();
+
+
+
+while (Exit == false)
 {
-    Console.WriteLine(row["username"] + " " + row["password"]);
+    Console.Clear(); 
+    switch(MenuChoice)
+    {
+        case 1:
+            break;
+
+            case 2:
+            break;
+
+        case 3:
+            break;
+
+        case 4:
+            break;
+
+        case 5:
+            break;
+
+        case 6:
+            break;
+
+        case 7:
+            break;
+
+            default:
+            MenuChoice = 0;
+            break;
+
+
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+ void GraphicMeny() // Huvudmeny
+{
+    Console.WriteLine("**********************************************************************************");
+    Console.WriteLine("*|                                                                              |*");
+    Console.WriteLine("*|       1.    Show how many unique countries there are.                        |*");
+    Console.WriteLine("*|                                                                              |*");
+    Console.WriteLine("*|       2.    Show the country the most people come from.                      |*");
+    Console.WriteLine("*|                                                                              |*");
+    Console.WriteLine("*|       3.    List the 10 first users with a name starting with L              |*");
+    Console.WriteLine("*|                                                                              |*");
+    Console.WriteLine("*|       4.    Show all users that have the same letter as first and last name. |*");
+    Console.WriteLine("*|                                                                              |*");
+    Console.WriteLine("*|       5.    Count how many countries are from Nordic and Scandinavian.       |*");
+    Console.WriteLine("*|                                                                              |*");
+    Console.WriteLine("*|       6.    Are all username and passwords unique?                           |*");
+    Console.WriteLine("*|                                                                              |*");
+    Console.WriteLine("*|       7.    Exit.                                                            |*");
+    Console.WriteLine("*|                                                                              |*");
+    Console.WriteLine("**********************************************************************************");
+    
+}
+
+
+
+
+
+
+
+
+
 
 
 static DataTable GetDataTable(string sql, string paramName, string paramValue)
@@ -62,4 +136,16 @@ static void ExecuteSQL(string sql, string paramName, string paramValue)
 }
 
 
+
+ void PrintRow()
+{
+    foreach (DataRow row in dt.Rows)
+    {
+        for (var i = 0; i < dt.Columns.Count; i++)
+        {
+            Console.WriteLine(row[i] + " ");
+        }
+        Console.WriteLine();
+    }
+}
 
